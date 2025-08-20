@@ -1,0 +1,113 @@
+:root {
+	--track-bg: #fafafa;
+	--grid: #eee;
+
+	--planA: #6366f1;
+	--planB: #4f46e5;
+	--plan-border: #3730a3;
+
+	--late: #ef4444;
+	--early: #f59e0b;
+
+	--fact-green-stripe: rgba(34, 197, 94, 0.22);
+	--fact-green-bg: rgba(16, 185, 129, 0.1);
+	--fact-green-border: #bbf7d0;
+
+	--day-divider: rgba(0, 0, 0, 0.22);
+	--day-divider-glow: rgba(0, 0, 0, 0.06);
+}
+
+html[data-theme="dark"] {
+	color-scheme: dark;
+}
+
+:root[data-theme="dark"] {
+	--track-bg: #0f172a;
+	--grid: rgba(255, 255, 255, 0.08);
+
+	--planA: #818cf8;
+	--planB: #6366f1;
+	--plan-border: #a5b4fc;
+
+	--late: #f87171;
+	--early: #fbbf24;
+
+	--fact-green-stripe: rgba(34, 197, 94, 0.22);
+	--fact-green-bg: rgba(16, 185, 129, 0.12);
+	--fact-green-border: #86efac;
+
+	--day-divider: rgba(255, 255, 255, 0.22);
+	--day-divider-glow: rgba(255, 255, 255, 0.06);
+}
+
+/* дарк-подправки контейнеров */
+html[data-theme="dark"] .timeline {
+	background: #0b1020;
+	border-color: #1f2937;
+	box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+html[data-theme="dark"] .row {
+	border-bottom-color: #1f2937;
+}
+html[data-theme="dark"] .ticks {
+	background: var(--track-bg);
+	border-bottom-color: #1f2937;
+}
+html[data-theme="dark"] .tick {
+	color: #cbd5e1;
+}
+html[data-theme="dark"] .cell-left {
+	background: transparent;
+}
+html[data-theme="dark"] .day-label {
+	background: #0b1020;
+	border-color: #334155;
+	color: #cbd5e1;
+	box-shadow: none;
+}
+html[data-theme="dark"] .bar.fact {
+	color: #d1fae5;
+}
+html[data-theme="dark"] .chip--absence {
+	background: rgba(127, 29, 29, 0.28);
+	color: #fecaca;
+	border-color: rgba(248, 113, 113, 0.45);
+}
+
+/* Красивые скроллы для любого скроллируемого контейнера */
+.nice-scroll {
+	scrollbar-gutter: stable both-edges; /* без «прыжков» контента */
+	scrollbar-width: thin; /* Firefox */
+	scrollbar-color: var(--sb-thumb) var(--sb-bg);
+}
+
+/* WebKit (Chromium/Edge/Safari*) */
+.nice-scroll::-webkit-scrollbar {
+	width: var(--sb-size);
+	height: var(--sb-size); /* горизонтальная полоса */
+}
+
+.nice-scroll::-webkit-scrollbar-track {
+	background: var(--sb-bg);
+	border-radius: var(--sb-radius);
+}
+
+.nice-scroll::-webkit-scrollbar-thumb {
+	background: linear-gradient(180deg, var(--sb-thumb), var(--sb-thumb-hover));
+	border-radius: var(--sb-radius);
+	border: 2px solid var(--sb-bg); /* «канавка» вокруг бегунка */
+	box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+}
+
+.nice-scroll::-webkit-scrollbar-thumb:hover {
+	background: var(--sb-thumb-hover);
+}
+
+.nice-scroll::-webkit-scrollbar-corner {
+	background: var(--sb-corner);
+}
+
+/* Чутка толще при ховере всего контейнера */
+.nice-scroll:hover {
+	--sb-size: 12px;
+}

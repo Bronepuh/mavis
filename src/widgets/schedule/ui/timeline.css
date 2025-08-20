@@ -1,0 +1,255 @@
+.timeline {
+	position: relative;
+	overflow: auto;
+	background: #fff;
+	border: 1px solid #f0f0f0;
+	border-radius: 16px;
+	box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+.timeline__grid {
+	position: relative;
+	min-width: 720px;
+}
+
+.ticks {
+	display: flex;
+	height: 44px;
+	align-items: stretch;
+	background: var(--track-bg);
+	position: sticky;
+	top: 0;
+	z-index: 5;
+	border-bottom: 1px solid #f0f0f0;
+	font-size: 12px;
+	border-top-left-radius: 16px;
+	border-top-right-radius: 16px;
+}
+.tick {
+	flex: 0 0 var(--colw);
+	border-right: 1px solid var(--grid);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #8c8c8c;
+	white-space: nowrap;
+}
+
+.row {
+	display: grid;
+	border-bottom: 1px solid #f5f5f5;
+}
+.cell-left {
+	padding: 12px 16px;
+	background: #fff;
+}
+.cell-right {
+	position: relative;
+	overflow: visible;
+	padding: 16px 0 28px;
+	min-height: 100px;
+}
+.track {
+	position: relative;
+	height: 100%;
+}
+
+/* Клетки */
+.grid-columns {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	z-index: 0;
+	pointer-events: none;
+}
+.grid-columns > div {
+	flex: 0 0 var(--colw);
+	border-right: 1px dashed var(--grid);
+}
+
+/* Разделители суток */
+.day-splits {
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+	pointer-events: none;
+}
+.day-split {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 0;
+	border-right: 2px solid var(--day-divider);
+	box-shadow: 1px 0 0 var(--day-divider-glow);
+}
+
+/* Подписи дат */
+.day-labels {
+	position: absolute;
+	top: -18px;
+	left: 0;
+	right: 0;
+	height: 0;
+	z-index: 3;
+	pointer-events: none;
+}
+.day-label {
+	position: absolute;
+	transform: translateX(-50%);
+	background: #fff;
+	border: 1px solid #e5e7eb;
+	color: #6b7280;
+	font-size: 11px;
+	line-height: 18px;
+	height: 18px;
+	padding: 0 8px;
+	border-radius: 999px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+	white-space: nowrap;
+}
+
+.bar {
+	position: absolute;
+	height: 34px;
+	border-radius: 12px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 0 10px;
+	font-size: 12px;
+	letter-spacing: 0.2px;
+	z-index: 2;
+	box-sizing: border-box;
+	will-change: transform;
+	transform: translateZ(0);
+}
+.bar.plan {
+	background: linear-gradient(180deg, var(--planA), var(--planB));
+	color: #fff;
+	border: 1px solid var(--plan-border);
+	box-shadow: 0 6px 18px rgba(63, 81, 181, 0.18), inset 0 -1px 0 rgba(255, 255, 255, 0.25);
+}
+.bar.fact {
+	background: repeating-linear-gradient(45deg, var(--fact-green-stripe) 0 8px, transparent 8px 16px), var(--fact-green-bg);
+	border: 1px solid var(--fact-green-border);
+	color: #065f46;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+	background-clip: padding-box;
+	z-index: 3;
+}
+.badge {
+	font-size: 11px;
+	padding: 0 6px;
+	border-radius: 999px;
+	background: rgba(255, 255, 255, 0.35);
+}
+.badge--gray {
+	background: #f5f5f5;
+	color: #595959;
+}
+.text {
+	white-space: nowrap;
+}
+
+/* Компактные режимы */
+.bar.compact .text {
+	display: none;
+}
+.bar.ultra .text,
+.bar.ultra .badge {
+	display: none;
+}
+.bar.tiny {
+	height: 24px;
+	padding: 0 6px;
+	border-radius: 10px;
+}
+.bar.tiny .text,
+.bar.tiny .badge {
+	display: none;
+}
+
+.deviation {
+	position: absolute;
+	top: 26px;
+	height: 12px;
+	border-radius: 6px;
+	z-index: 4;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+.deviation.lateCap {
+	background: #fee2e2;
+	border: 1px solid var(--late);
+}
+.deviation.earlyCap {
+	background: #ffedd5;
+	border: 1px solid var(--early);
+}
+
+/* Прогул */
+.absenceRing {
+	position: absolute;
+	top: 0;
+	height: 36px;
+	border-radius: 12px;
+	border: 2px dashed var(--late);
+	box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.08) inset, 0 4px 12px rgba(239, 68, 68, 0.12);
+	background: transparent;
+	z-index: 4;
+	pointer-events: none;
+}
+.chip {
+	position: absolute;
+	top: -14px;
+	height: 20px;
+	padding: 0 8px;
+	display: flex;
+	align-items: center;
+	border-radius: 999px;
+	font-size: 11px;
+	line-height: 20px;
+	font-weight: 600;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+	user-select: none;
+	pointer-events: none;
+	z-index: 5;
+	width: 56px;
+	justify-content: center;
+}
+.chip--absence {
+	background: #fff1f2;
+	color: #b91c1c;
+	border: 1px solid #fecdd3;
+}
+.absenceDot {
+	position: absolute;
+	top: -6px;
+	width: 12px;
+	height: 12px;
+	border-radius: 999px;
+	background: var(--late);
+	border: 2px solid #fff;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+	z-index: 5;
+}
+
+@media (max-width: 640px) {
+	.ticks {
+		height: 42px;
+		font-size: 11px;
+	}
+	.cell-left {
+		padding: 10px 12px;
+	}
+	.cell-right {
+		padding: 14px 0 26px;
+		min-height: 96px;
+	}
+	.bar {
+		height: 32px;
+		font-size: 12px;
+	}
+	.deviation {
+		top: 24px;
+		height: 10px;
+	}
+}
