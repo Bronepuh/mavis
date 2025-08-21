@@ -77,7 +77,8 @@ src/
 │  │  └─ theme/
 │  │     └─ useTheme.ts
 │  ├─ lib/
-|  |  ├─ antd.ts  # фасад-реэкспорт AntD
+|  |  └─ antd/
+|  |     └─ reexport.ts  # фасад-реэкспорт AntD
 │  │  └─ date/
 │  │     └─ getInitialRange.ts
 │  ├─ styles/
