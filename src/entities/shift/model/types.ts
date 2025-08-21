@@ -1,9 +1,9 @@
 export type ShiftPlan = {
-	employee: string;
-	store: string;
-	role: string;
-	startPlanned: string; // ISO
-	endPlanned: string; // ISO
+	employee: string; // ФИО
+	store: string; // Магазин
+	role: string; // Роль
+	startPlanned: string; // ISO-строка
+	endPlanned: string; // ISO-строка
 };
 
 export type ShiftFact = {

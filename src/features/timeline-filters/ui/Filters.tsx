@@ -1,39 +1,55 @@
+// src/features/timeline-filters/ui/Filters.tsx
 "use client";
+/**
+ * Панель фильтров: тема, показ факта и чекбоксы по типам отклонений (enum).
+ */
 import React from "react";
-import { Space, Checkbox, Switch } from "antd";
 import type { FiltersState } from "../model/types";
+import { ALL_DEVIATIONS, DEVIATION_LABEL } from "@/entities/shift/model/deviation";
+import { Space, Switch } from "@/shared/lib/antd/reexport";
+import PersistedCheckbox from "@/shared/ui/PersistedCheckbox";
 
-type Props = FiltersState & {
+type Props = Readonly<{
+	/** Показ/скрытие фактических смен. */
+	showFact: FiltersState["showFact"];
+	/** Флаги отклонений. */
+	deviations: FiltersState["deviations"];
+	/** Патч сохранения изменений. */
 	onChange: (patch: Partial<FiltersState>) => void;
+
 	themeLabel: string;
 	themeChecked: boolean;
 	onThemeToggle: (checked: boolean) => void;
-};
+}>;
 
-export function Filters({ showFact, showLate, showEarly, showAbsence, onChange, themeLabel, themeChecked, onThemeToggle }: Props) {
+console.log(ALL_DEVIATIONS);
+
+export function Filters({ showFact, deviations, onChange, themeLabel, themeChecked, onThemeToggle }: Props) {
 	return (
 		<>
 			<Space wrap size="middle" style={{ marginBottom: 16, marginRight: 16 }}>
 				<Space align="center">
 					<span>{themeLabel}</span>
-					<Switch checked={themeChecked} onChange={onThemeToggle} />
+					<Switch checked={themeChecked} onChange={onThemeToggle} aria-label="Переключатель темы интерфейса" />
 				</Space>
+
 				<Space align="center">
 					<span>Показывать факт</span>
-					<Switch checked={showFact} onChange={(v) => onChange({ showFact: v })} />
+					<Switch checked={showFact} onChange={(v) => onChange({ showFact: v })} aria-label="Показывать фактические смены" />
 				</Space>
 			</Space>
 
 			<Space wrap style={{ marginBottom: 16 }}>
-				<Checkbox checked={showLate} onChange={(e) => onChange({ showLate: e.target.checked })}>
-					Опоздания
-				</Checkbox>
-				<Checkbox checked={showEarly} onChange={(e) => onChange({ showEarly: e.target.checked })}>
-					Ранние уходы
-				</Checkbox>
-				<Checkbox checked={showAbsence} onChange={(e) => onChange({ showAbsence: e.target.checked })}>
-					Прогул
-				</Checkbox>
+				{ALL_DEVIATIONS.map((type) => (
+					<PersistedCheckbox
+						key={type}
+						persistKey={`filters:${type}`}
+						checked={deviations[type]}
+						onChange={(e) => onChange({ deviations: { ...deviations, [type]: e.target.checked } })}
+					>
+						{DEVIATION_LABEL[type]}
+					</PersistedCheckbox>
+				))}
 			</Space>
 		</>
 	);

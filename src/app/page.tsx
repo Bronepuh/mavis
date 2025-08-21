@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
-import ruRU from "antd/lib/locale/ru_RU";
-import { ConfigProvider, Divider, Space, Tag, Typography } from "antd";
 import plan from "@/shared/api/dto/plan.json";
 import fact from "@/shared/api/dto/fact.json";
 import Schedule from "@/widgets/schedule/ui/Schedule";
+import { ConfigProvider, Divider, Space, Tag, Typography, ruRU } from "@/shared/lib/antd/reexport";
+import { DEVIATION_LABEL, DeviationType } from "@/entities/shift/model/deviation";
 
 export default function Page() {
 	return (
@@ -19,9 +19,9 @@ export default function Page() {
 						План
 					</Tag>
 					<Tag>Факт (штриховка)</Tag>
-					<Tag color="error">Опоздание</Tag>
-					<Tag color="orange">Ранний уход</Tag>
-					<Tag color="magenta">Прогул</Tag>
+					<Tag color="error">{DEVIATION_LABEL[DeviationType.Late]}</Tag>
+					<Tag color="orange">{DEVIATION_LABEL[DeviationType.Early]}</Tag>
+					<Tag color="magenta">{DEVIATION_LABEL[DeviationType.Absence]}</Tag>
 				</Space>
 			</Space>
 		</ConfigProvider>

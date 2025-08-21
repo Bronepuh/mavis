@@ -1,6 +1,6 @@
-export type FiltersState = {
+import { DeviationFlags } from "@/entities/shift/model/deviation";
+
+export type FiltersState = Readonly<{
 	showFact: boolean;
-	showLate: boolean;
-	showEarly: boolean;
-	showAbsence: boolean;
-};
+	deviations: DeviationFlags;
+}>;
