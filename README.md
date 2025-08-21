@@ -77,12 +77,12 @@ src/
 │  │  └─ theme/
 │  │     └─ useTheme.ts
 │  ├─ lib/
+|  |  ├─ antd.ts  # фасад-реэкспорт AntD
 │  │  └─ date/
 │  │     └─ getInitialRange.ts
 │  ├─ styles/
 │  │  └─ scrollbars.css
 │  └─ ui/
-│     ├─ antd.ts                 # фасад-реэкспорт AntD
 │     ├─ PersistedCheckbox.tsx   # пример HOC над Checkbox
 │     └─ timeline/
 │        └─ size.ts
